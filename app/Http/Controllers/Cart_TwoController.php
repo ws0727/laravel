@@ -25,7 +25,6 @@ class Cart_TwoController extends Controller
      foreach ($h_id as $key => $value) {
      	foreach ($value as $key => $value1) {
      	$data[]=DB::select("select goods.product_name as g_name,cart.details,cart.num,goodsp.price from cart join goodsp on cart.g_id=goodsp.id join goods on goodsp.goods_id=goods.product_id where cart.u_id='$u_id 'and cart.g_id='$value1'");
-          
      	}
      	
      }
@@ -67,12 +66,15 @@ class Cart_TwoController extends Controller
 		     			  $status=1;
 		     			  $total=$num*$price;
 		        
-         DB::insert("insert into order_x (`h_goods`,`h_id`,`h_type`,`num`,`price`,`order_id`) values ('$gname','$value1','$details','$num','$total','$time')");
+          DB::insert("insert into order_x (`h_goods`,`h_id`,`h_type`,`num`,`price`,`order_id`) values ('$gname','$value1','$details','$num','$total','$time')");
+           // DB::delete("delete from cart where g_id='$value1'");
 		     		}
+            
 		     	}
+
 		      }
          DB::insert("insert into order_z (`time`,`status`,`u_id`,`address`,`order_id`) values ('$time','$status','$u_id','$address','$time')");
-		   return response()->json(['code' => 200,'status' => 'ok','data' =>'添加成功']);
+		    return response()->json($time);
 		   }	 
 
 	}

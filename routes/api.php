@@ -42,16 +42,25 @@ Route::group([
     Route::post('cart_two', 'Cart_TwoController@cart_two');
     Route::post('cart_two1', 'Cart_TwoController@cart_two1');
     Route::post('add', 'Cart_TwoController@add');
-     Route::post('add1', 'Cart_TwoController@add1');
+    Route::post('add1', 'Cart_TwoController@add1');
 
 
 
+});
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'pay'
+
+], function ($router) {
+
+    Route::get('index', 'PayController@index');
+    Route::any('return', 'PayController@return');
+    Route::any('notify', 'PayController@notify');
 });
 
    Route::post('goods','HomeController@goods');
    Route::get('tree','HomeController@tree');
    Route::get('tree1','HomeController@tree1');
    Route::post('product','HomeController@product');
-
-
-
