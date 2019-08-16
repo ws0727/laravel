@@ -47,7 +47,6 @@ class PayController extends Controller
     public function return(Request $request)
     {
         $pay = new Pay($this->config);
-
         $arr=$pay->driver('alipay')->gateway()->verify($request->all());
          
          $aa=$arr['out_trade_no'];
